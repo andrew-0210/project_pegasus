@@ -43,6 +43,41 @@ const Hero = () => {
 		fetchData();
 	}, []);
 
+
+	const subsTenure = {
+		weekly: 7,
+		monthly: 30,
+		quarterly: 90,
+		halfYearly: 365 / 2,
+		yearly: 365,
+	};
+
+	const expiresAt = new Date(
+		Date.now() + subsTenure.halfYearly * 24 * 60 * 60 * 1000,
+	);
+	console.log(`Your subscription ends on ${expiresAt}`);
+
+	const date = expiresAt.getDate();
+	const year = expiresAt.getFullYear();
+
+	const monthNames = [
+		"Jan",
+		"Feb",
+		"Mar",
+		"Apr",
+		"May",
+		"Jun",
+		"Jul",
+		"Aug",
+		"Sep",
+		"Oct",
+		"Nov",
+		"Dec",
+	];
+	const month = monthNames[expiresAt.getMonth()];
+
+	console.log(`Your subscription ends on ${date} ${month} ${year}`);
+
 	return (
 		<section className="flex flex-col gap-5 items-center justify-center h-screen">
 			<main className="flex flex-col gap-5 items-center justify-center text-center max-w-[80em]">
