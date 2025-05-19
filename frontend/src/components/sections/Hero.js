@@ -4,8 +4,9 @@ import Loader from "../ui/Loader";
 import gsap from "gsap";
 import { useGSAP } from "@gsap/react";
 import { SplitText } from "gsap/SplitText";
+import { ScrollTrigger } from "gsap/ScrollTrigger";
 
-gsap.registerPlugin(useGSAP, SplitText);
+gsap.registerPlugin(useGSAP, SplitText, ScrollTrigger);
 
 const Hero = () => {
 	const [data, setData] = useState("");
@@ -16,7 +17,7 @@ const Hero = () => {
 			type: "words, chars",
 			onSplit(self) {
 				// runs every time it splits
-				gsap.from(self.words, {
+				gsap.from(self.chars, {
 					duration: 1,
 					y: 100,
 					autoAlpha: 0,
@@ -43,7 +44,6 @@ const Hero = () => {
 		fetchData();
 	}, []);
 
-
 	const subsTenure = {
 		weekly: 7,
 		monthly: 30,
@@ -57,7 +57,7 @@ const Hero = () => {
 	);
 	console.log(`Your subscription ends on ${expiresAt}`);
 
-	const date = expiresAt.getDate();
+	const date = expiresAt.getDate() + 1;
 	const year = expiresAt.getFullYear();
 
 	const monthNames = [
@@ -81,11 +81,14 @@ const Hero = () => {
 	return (
 		<section className="flex flex-col gap-5 items-center justify-center h-screen">
 			<main className="flex flex-col gap-5 items-center justify-center text-center max-w-[80em]">
-				<h1 className="text-[4rem] tracking-tight leading-[1.2] split">
+				<h1 className="text-[4rem] tracking-tight leading-[1.2] split overflow-y-hidden">
 					All‑on‑4 in Brisbane: Full‑Arch Confidence at Aspley Elite Dental
 				</h1>
 				{data ? (
-					<p className="text-[0.938rem] split">{data.description}</p>
+					<p className="text-[0.938rem] split whitespace-pre-line">
+						{data.description}{" "}
+						{`Your subscription ends on ${date} ${month} ${year}`}
+					</p>
 				) : (
 					<Loader />
 				)}

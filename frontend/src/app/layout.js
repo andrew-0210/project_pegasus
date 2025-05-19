@@ -1,15 +1,21 @@
-import { Manrope } from "next/font/google";
+import { Manrope, Instrument_Serif } from "next/font/google";
 import "./globals.css";
 import Header from "@/components/layout/Header";
 import Footer from "@/components/layout/Footer";
 
-// const manropeSans = Manrope({
-// 	variable: "--font-manrope-sans",
-// 	subsets: ["latin"],
-// 	preload: true,
-// 	weight: ["200", "400", "500", "600", "700", "800"],
-// 	display: "swap",
-// });
+const manropeSans = Manrope({
+	variable: "--font-manrope-sans",
+	subsets: ["latin"],
+	preload: true,
+	weight: ["200", "400", "500", "600", "700", "800"],
+	display: "swap",
+});
+const instrumentSerif = Instrument_Serif({
+	variable: "--font-instrument-serif",
+	subsets: ["latin"],
+	preload: true,
+	weight: ["400"],
+});
 
 export const metadata = {
 	title: "Create Next App",
@@ -19,7 +25,8 @@ export const metadata = {
 export default function RootLayout({ children }) {
 	return (
 		<html lang="en">
-			<body className={` antialiased`}>
+			<body
+				className={`${manropeSans.variable} ${instrumentSerif.variable} antialiased`}>
 				<Header />
 				{children}
 				<Footer />
